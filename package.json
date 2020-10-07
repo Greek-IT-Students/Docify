@@ -1,0 +1,22 @@
+{
+  "name": "DocifyWorkspace",
+  "version": "0.3.0",
+  "description": "A boilerplate to document a library",
+  "private": true,
+	"workspaces": [
+		"packages/*"
+	],
+  "scripts": {    
+    "publish": "gulp publish",
+    "version": "gulp version",
+    "versions": "gulp versions"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "lerna": "^3.13.2",
+    "gulp": "4.0.1"
+  },
+  "dependencies": {
+  }
+}

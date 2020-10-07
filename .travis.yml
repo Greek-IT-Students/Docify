@@ -1,0 +1,36 @@
+language: node_js
+sudo: false
+node_js:
+ - 10
+install:
+  - npm install lerna -g
+script:  
+  - lerna bootstrap
+jobs:
+  include:
+    - stage: Docify_Example_Project-lib publish
+      node_js: "10"
+      before_script: cd packages/Docify_Example_Project-lib
+      script: 
+        - npm i
+        - npm run build            
+      deploy:
+        provider: npm
+        email: "mehmetbaran@mehmetbaran.net"
+        api_key: "$NPM_TOKEN"
+        skip_cleanup: true
+        on:
+          branch: master
+      after_deploy: cd ../../
+    - stage: Docify_Example_Project publish
+      node_js: "10"
+      script: echo "Deploying Docify_Example_Project to npm ..."
+      before_deploy: cd packages/Docify_Example_Project
+      deploy:
+        provider: npm
+        email: "mehmetbaran@mehmetbaran.net"
+        api_key: "$NPM_TOKEN"
+        skip_cleanup: true
+        on:
+          branch: master
+      after_deploy: cd ../../
